@@ -1,0 +1,9 @@
+<mvc:View controllerName="ns.basicv4.controller.Home"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page id="page" title="testsssssssss">
+        <content>
+            <Button id="_IDGenButton" text="Press me" press="onPress" />
+        </content>
+    </Page>
+</mvc:View>
