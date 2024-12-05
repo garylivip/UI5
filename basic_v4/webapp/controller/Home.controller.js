@@ -5,6 +5,7 @@ sap.ui.define([
 
     return Controller.extend("ns.basicv4.controller.Home", {
         onInit() {
+       
         }
     });
 });

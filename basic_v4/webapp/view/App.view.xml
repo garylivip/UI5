@@ -3,12 +3,5 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
     <App id="app">
-        <pages>
-            <Page id="page1" title="rerrrr">
-                <content>
-                    <Button id="_IDGenButton1" text="rrrrrrrrrr" press="onPress" />
-                </content>
-            </Page>
-        </pages>
     </App>
 </mvc:View>
