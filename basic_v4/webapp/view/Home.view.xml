@@ -1,68 +1,151 @@
-<mvc:View controllerName="ns.basicv4.controller.Home"
+<mvc:View
+    controllerName="ns.basicv4.controller.Home"
     xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m">
-	<Shell id="_IDGenShell1">
-		<App id="_IDGenApp" busy="{homeView>/busy}" class="sapUiSizeCompact">
-			<pages>
-				<Page id="_IDGenPage" title="{i18n>peoplePageTitle}">
-					<content>
-						<Table
-							id="peopleList"
-							growing="true"
-							growingThreshold="10"
-							items="{
+    xmlns="sap.m"
+>
+    <Shell id="_IDGenShell1">
+        <App
+            id="_IDGenApp"
+            busy="{homeView>/busy}"
+            class="sapUiSizeCompact"
+        >
+            <pages>
+                <Page
+                    id="_IDGenPage"
+                    title="{i18n>peoplePageTitle}"
+                >
+                    <content>
+                        <Table
+                            id="peopleList"
+                            growing="true"
+                            growingThreshold="10"
+                            items="{
 								path: '/People',
 								parameters: {
-									$count: true
+									$count: true,
+									$$updateGroupId: 'peopleGroup'
 								}								
-							}">
-						<headerToolbar>
-							<OverflowToolbar id="_IDGenOverflowToolbar">
-								<content>
-									<ToolbarSpacer id="_IDGenToolbarSpacer" />
-									<SearchField id="searchField" width="20rem" search=".onSearch" placeholder="{i18n>searchFieldPlaceholder}"/>
-									<Button id="refreshUsersButton" icon="sap-icon://refresh" 
-									text="{i18n>refreshButtonText}" press=".onRefresh"/>
-									
-									<Button id="sortUsersButton" icon="sap-icon://sort" 
-									text="{i18n>sortButtonText}" press=".onSort"/>
-								</content>
-							</OverflowToolbar>
-						</headerToolbar>
-							<columns>
-								<Column id="userNameColumn">
-									<Text id="_IDGenText" text="{i18n>userNameLabelText}"/>
-								</Column>
-								<Column id="firstNameColumn">
-									<Text id="_IDGenText1" text="{i18n>firstNameLabelText}"/>
-								</Column>
-								<Column id="lastNameColumn">
-									<Text id="_IDGenText2" text="{i18n>lastNameLabelText}"/>
-								</Column>
-								<Column id="ageColumn">
-									<Text id="_IDGenText3" text="{i18n>ageLabelText}"/>
-								</Column>
-							</columns>
-							<items>
-								<ColumnListItem id="_IDGenColumnListItem">
-									<cells>
-										<Input id="_IDGenInput" value="{UserName}"/>
-									</cells>
-									<cells>
-										<Input id="_IDGenInput1" value="{FirstName}"/>
-									</cells>
-									<cells>
-										<Input id="_IDGenInput2" value="{LastName}"/>
-									</cells>
-									<cells>
-										<Input id="_IDGenInput3" value="{Age}"/>
-									</cells>
-								</ColumnListItem>
-							</items>
-						</Table>
-					</content>
-				</Page>
-			</pages>
-		</App>
-	</Shell>
+							}"
+                        >
+                            <headerToolbar>
+                                <OverflowToolbar id="_IDGenOverflowToolbar">
+                                    <content>
+                                        <ToolbarSpacer
+                                            id="_IDGenToolbarSpacer"
+                                        />
+                                        <SearchField
+                                            id="searchField"
+                                            width="20rem"
+                                            search=".onSearch"
+                                            placeholder="{i18n>searchFieldPlaceholder}"
+                                            enabled="{= !${homeView>/hasUIChanges}}"
+                                        />
+                                        <Button
+                                            id="addUserButton"
+                                            icon="sap-icon://add"
+                                            text="{i18n>createButtonText}"
+                                            press=".onCreate">
+											<layoutData> 
+												<OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData" priority="NeverOverflow" />
+											</layoutData>
+                                        </Button>
+                                        <Button
+                                            id="refreshUsersButton"
+                                            icon="sap-icon://refresh"
+                                            text="{i18n>refreshButtonText}"
+                                            press=".onRefresh"
+                                        />
+
+                                        <Button
+                                            id="sortUsersButton"
+                                            icon="sap-icon://sort"
+                                            text="{i18n>sortButtonText}"
+											enabled="{=!${homeView>/hasUIChanges} }"
+                                            press=".onSort"
+                                        />
+                                    </content>
+                                </OverflowToolbar>
+                            </headerToolbar>
+                            <columns>
+                                <Column id="userNameColumn">
+                                    <Text
+                                        id="_IDGenText"
+                                        text="{i18n>userNameLabelText}"
+                                    />
+                                </Column>
+                                <Column id="firstNameColumn">
+                                    <Text
+                                        id="_IDGenText1"
+                                        text="{i18n>firstNameLabelText}"
+                                    />
+                                </Column>
+                                <Column id="lastNameColumn">
+                                    <Text
+                                        id="_IDGenText2"
+                                        text="{i18n>lastNameLabelText}"
+                                    />
+                                </Column>
+                                <Column id="ageColumn">
+                                    <Text
+                                        id="_IDGenText3"
+                                        text="{i18n>ageLabelText}"
+                                    />
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem id="_IDGenColumnListItem">
+                                    <cells>
+                                        <Input
+                                            id="_IDGenInput"
+                                            value="{UserName}"
+											valueLiveUpdate="true"
+											liveChange=".onInputChange"
+                                        />
+                                    </cells>
+                                    <cells>
+                                        <Input
+                                            id="_IDGenInput1"
+                                            value="{FirstName}"
+											liveChange=".onInputChange"
+                                        />
+                                    </cells>
+                                    <cells>
+                                        <Input
+                                            id="_IDGenInput2"
+                                            value="{LastName}"
+											liveChange=".onInputChange"
+                                        />
+                                    </cells>
+                                    <cells>
+                                        <Input
+                                            id="_IDGenInput3"
+                                            value="{Age}"
+											valueLiveUpdate="true"
+											liveChange=".onInputChange"
+                                        />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </content>
+					<footer>
+                        <Toolbar id="footerToolbar">
+							<ToolbarSpacer id="_IDGenToolbarSpacer1" />
+							<Button
+								id="saveButton"
+								text="{i18n>saveButtonText}"
+								type="Emphasized"
+								press=".onSave"
+								enabled="{=${message>/}.length === 0 &amp;&amp; ${homeView>/usernameEmpty} === false }" />
+							<Button 
+								id="doneButton"
+								text="{i18n>cancelButtonText}"
+								press=".onResetChanges"
+							/>
+						</Toolbar>
+					</footer>
+                </Page>
+            </pages>
+        </App>
+    </Shell>
 </mvc:View>
