@@ -79,12 +79,10 @@
       },
       "": {
         "dataSource": "mainService",
-        "preload": true,
         "settings": {
           "operationMode": "Server",
           "autoExpandSelect": true,
-          "earlyRequests": true,
-          "groupId": "$direct"
+          "groupId": "$auto"
         }
       }
     },

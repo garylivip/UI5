@@ -225,6 +225,10 @@ sap.ui.define(
         );
       },
 
+      onSelectionChange(oEvent) {
+       this._setDetailArea(oEvent.getParameter("listItem").getBindingContext());
+      },
+
       _setUIChanges(bHasUIChanges) {
         if (this._bTechnicalErrors) {
           bHasUIChanges = true;
@@ -247,6 +251,21 @@ sap.ui.define(
         let oModel = this.getView().getModel("homeView");
         oModel.setProperty("/busy", bIsBusy);
       },
+
+      _setDetailArea(oUserContext) {
+        let oDetailArea = this.byId("detailArea");
+        let oLayout = this.byId("defaultLayout");
+        let oSearchField = this.byId("searchField");
+        console.log("oUserContext", oUserContext);
+        
+        oDetailArea.setBindingContext(oUserContext || null);
+        oDetailArea.setVisible(!!oUserContext);
+        oLayout.setSize(oUserContext ? "60%" : "100%");
+        oLayout.setResizable(!!oUserContext);
+
+        oSearchField.setWidth(oUserContext ? "40%" : "20%");
+
+      }
     });
   }
 );
