@@ -34,7 +34,7 @@ sap.ui.define(
         let oViewModel = new JSONModel({
           busy: false,
           hasUIChanges: false,
-          usernameEmpty: true,
+          usernameEmpty: false,
           order: 0,
         });
         this.getView().setModel(oViewModel, "homeView");
@@ -132,7 +132,7 @@ sap.ui.define(
 
       onSave() {
         console.log("save xxxxxxxxxxxxxxxxxxxxxx");
-        
+
         var fnSuccess = function () {
           this._setBusy(false);
           MessageToast.show(this._getText("changesSentMessage"));
@@ -153,21 +153,59 @@ sap.ui.define(
         this._bTechnicalErrors = false;
       },
 
-      onResetChanges(){
+      onResetChanges() {
         console.log("reset xxxxxxxxxxxxxxxxxxxxxx");
-        
+
         this.byId("peopleList").getBinding("items").resetChanges();
         this._bTechnicalErrors = false;
-        this._setUIChanges();  
+        this._setUIChanges();
       },
 
       onInputChange(oEvent) {
-        if (oEvent.getParameter("escPressed") ) {
+        if (oEvent.getParameter("escPressed")) {
           this._setUIChanges();
         } else {
-          if (oEvent.getSource().getParent().getBindingContext().hasPendingChanges()) {
-            this.getView().getModel("homeView").setProperty("/usernameEmpty", false);
+          if (
+            oEvent
+              .getSource()
+              .getParent()
+              .getBindingContext()
+              .hasPendingChanges()
+          ) {
+            this.getView()
+              .getModel("homeView")
+              .setProperty("/usernameEmpty", false);
           }
+        }
+      },
+
+      onDelete() {
+        let oContext;
+        let oSelected = this.byId("peopleList").getSelectedItem();
+        let sUserName;
+
+        if (oSelected) {
+          oContext = oSelected.getBindingContext();
+          sUserName = oContext.getProperty("UserName");
+
+          oContext.delete("$auto").then(
+            () => {
+              MessageToast.show(
+                this._getText("deletionSuccessMessage", [sUserName])
+              );
+            },
+            (oError) => {
+              this._setBusy();
+              if (oError.canceled) {
+                MessageToast.show(
+                  this._getText("deletionRestoredMessage", [sUserName])
+                );
+                return;
+              }
+              MessageBox.error(oError.message);
+            }
+          );
+          this._setUIChanges(true);
         }
       },
 
@@ -192,7 +230,7 @@ sap.ui.define(
       _setBusy(bIsBusy) {
         let oModel = this.getView().getModel("homeView");
         oModel.setProperty("/busy", bIsBusy);
-      }
+      },
     });
   }
 );

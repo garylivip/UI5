@@ -26,6 +26,7 @@
 									$$updateGroupId: 'peopleGroup'
 								}								
 							}"
+							mode="SingleSelectLeft"
                         >
                             <headerToolbar>
                                 <OverflowToolbar id="_IDGenOverflowToolbar">
@@ -49,6 +50,15 @@
 												<OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData" priority="NeverOverflow" />
 											</layoutData>
                                         </Button>
+										<Button
+											id="deleteUsersButton"
+											icon="sap-icon://delete"
+											text="{i18n>deleteButtonText}"
+											press=".onDelete" >
+											<layoutData>
+												<OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData1" parseError="NeverOverflow"/>
+											</layoutData>
+										</Button>
                                         <Button
                                             id="refreshUsersButton"
                                             icon="sap-icon://refresh"
