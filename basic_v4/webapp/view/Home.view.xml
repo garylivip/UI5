@@ -14,6 +14,15 @@
                     id="_IDGenPage"
                     title="{i18n>peoplePageTitle}"
                 >
+                    <headerContent>
+                        <Button
+                            id="resetChangesButton"
+                            text="{i18n>resetChangesButtonText}"
+							enabled="{= !${homeView>/hasUIChanges} }"
+                            press=".onResetDataSource"
+							type="Emphasized"
+                        />
+                    </headerContent>
                     <content>
                         <Table
                             id="peopleList"
@@ -26,7 +35,7 @@
 									$$updateGroupId: 'peopleGroup'
 								}								
 							}"
-							mode="SingleSelectLeft"
+                            mode="SingleSelectLeft"
                         >
                             <headerToolbar>
                                 <OverflowToolbar id="_IDGenOverflowToolbar">
@@ -45,20 +54,28 @@
                                             id="addUserButton"
                                             icon="sap-icon://add"
                                             text="{i18n>createButtonText}"
-                                            press=".onCreate">
-											<layoutData> 
-												<OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData" priority="NeverOverflow" />
-											</layoutData>
+                                            press=".onCreate"
+                                        >
+                                            <layoutData>
+                                                <OverflowToolbarLayoutData
+                                                    id="_IDGenOverflowToolbarLayoutData"
+                                                    priority="NeverOverflow"
+                                                />
+                                            </layoutData>
                                         </Button>
-										<Button
-											id="deleteUsersButton"
-											icon="sap-icon://delete"
-											text="{i18n>deleteButtonText}"
-											press=".onDelete" >
-											<layoutData>
-												<OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData1" parseError="NeverOverflow"/>
-											</layoutData>
-										</Button>
+                                        <Button
+                                            id="deleteUsersButton"
+                                            icon="sap-icon://delete"
+                                            text="{i18n>deleteButtonText}"
+                                            press=".onDelete"
+                                        >
+                                            <layoutData>
+                                                <OverflowToolbarLayoutData
+                                                    id="_IDGenOverflowToolbarLayoutData1"
+                                                    parseError="NeverOverflow"
+                                                />
+                                            </layoutData>
+                                        </Button>
                                         <Button
                                             id="refreshUsersButton"
                                             icon="sap-icon://refresh"
@@ -70,7 +87,7 @@
                                             id="sortUsersButton"
                                             icon="sap-icon://sort"
                                             text="{i18n>sortButtonText}"
-											enabled="{=!${homeView>/hasUIChanges} }"
+                                            enabled="{=!${homeView>/hasUIChanges} }"
                                             press=".onSort"
                                         />
                                     </content>
@@ -108,52 +125,53 @@
                                         <Input
                                             id="_IDGenInput"
                                             value="{UserName}"
-											valueLiveUpdate="true"
-											liveChange=".onInputChange"
+                                            valueLiveUpdate="true"
+                                            liveChange=".onInputChange"
                                         />
                                     </cells>
                                     <cells>
                                         <Input
                                             id="_IDGenInput1"
                                             value="{FirstName}"
-											liveChange=".onInputChange"
+                                            liveChange=".onInputChange"
                                         />
                                     </cells>
                                     <cells>
                                         <Input
                                             id="_IDGenInput2"
                                             value="{LastName}"
-											liveChange=".onInputChange"
+                                            liveChange=".onInputChange"
                                         />
                                     </cells>
                                     <cells>
                                         <Input
                                             id="_IDGenInput3"
                                             value="{Age}"
-											valueLiveUpdate="true"
-											liveChange=".onInputChange"
+                                            valueLiveUpdate="true"
+                                            liveChange=".onInputChange"
                                         />
                                     </cells>
                                 </ColumnListItem>
                             </items>
                         </Table>
                     </content>
-					<footer>
+                    <footer>
                         <Toolbar id="footerToolbar">
-							<ToolbarSpacer id="_IDGenToolbarSpacer1" />
-							<Button
-								id="saveButton"
-								text="{i18n>saveButtonText}"
-								type="Emphasized"
-								press=".onSave"
-								enabled="{=${message>/}.length === 0 &amp;&amp; ${homeView>/usernameEmpty} === false }" />
-							<Button 
-								id="doneButton"
-								text="{i18n>cancelButtonText}"
-								press=".onResetChanges"
-							/>
-						</Toolbar>
-					</footer>
+                            <ToolbarSpacer id="_IDGenToolbarSpacer1" />
+                            <Button
+                                id="saveButton"
+                                text="{i18n>saveButtonText}"
+                                type="Emphasized"
+                                press=".onSave"
+                                enabled="{=${message>/}.length === 0 &amp;&amp; ${homeView>/usernameEmpty} === false }"
+                            />
+                            <Button
+                                id="doneButton"
+                                text="{i18n>cancelButtonText}"
+                                press=".onResetChanges"
+                            />
+                        </Toolbar>
+                    </footer>
                 </Page>
             </pages>
         </App>

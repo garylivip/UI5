@@ -209,6 +209,22 @@ sap.ui.define(
         }
       },
 
+      onResetDataSource() {
+        console.log("reset data sources xxxxxxxxxxxxxxxxxxxxxx");
+        
+        let oModel = this.getView().getModel();
+        let oOperation = oModel.bindContext("/ResetDataSource(...)");
+        oOperation.invoke().then(
+          () => {
+            oModel.refresh();
+            MessageToast.show(this._getText("sourceResetSuccessMessage"));
+          },
+          (oError) => {
+            MessageBox.error(oError.message);
+          }
+        );
+      },
+
       _setUIChanges(bHasUIChanges) {
         if (this._bTechnicalErrors) {
           bHasUIChanges = true;
