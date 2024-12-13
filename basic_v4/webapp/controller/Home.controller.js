@@ -229,6 +229,10 @@ sap.ui.define(
        this._setDetailArea(oEvent.getParameter("listItem").getBindingContext());
       },
 
+      formatAsText(anyTypeValue) {
+        return anyTypeValue || this._getText("none");
+      },
+
       _setUIChanges(bHasUIChanges) {
         if (this._bTechnicalErrors) {
           bHasUIChanges = true;
